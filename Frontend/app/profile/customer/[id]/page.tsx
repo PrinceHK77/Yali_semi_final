@@ -135,12 +135,20 @@ export default function CustomerProfile({ params }: { params: Promise<{ id: stri
           </Button>
           <div className="text-center">
             <div className="relative mb-4">
-              <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
-                <User className="h-12 w-12 text-gray-400" />
-              </div>
-              <Button 
-                variant="outline" 
-                size="icon" 
+              {persona.profile_photo ? (
+                <img
+                  src={persona.profile_photo.startsWith("http") ? persona.profile_photo : `http://localhost:5000/uploads/${persona.profile_photo}`}
+                  alt={`${persona.name}'s profile`}
+                  className="w-24 h-24 rounded-full object-cover mx-auto"
+                />
+              ) : (
+                <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
+                  <User className="h-12 w-12 text-gray-400" />
+                </div>
+              )}
+              <Button
+                variant="outline"
+                size="icon"
                 className="absolute bottom-0 right-0 bg-white rounded-full shadow-sm hover:bg-gray-50"
                 onClick={() => setShowImageModal(true)}
               >
@@ -885,4 +893,4 @@ export default function CustomerProfile({ params }: { params: Promise<{ id: stri
       </Dialog>
     </div>
   )
-} 
+}
